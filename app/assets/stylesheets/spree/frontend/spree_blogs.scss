@@ -1,0 +1,85 @@
+/* tag cloud widget */
+.tag_cloud {
+  padding: 0;
+  margin-bottom: 10px;
+
+  li {
+    display: inline-block;
+  }
+
+  .css1 {
+    font-size: 1em;
+  }
+
+  .css2 {
+    font-size: 1.2em;
+  }
+
+  .css3 {
+    font-size: 1.4em;
+    font-weight: bold;
+  }
+
+  .css4 {
+    font-size: 1.8em;
+    font-weight: bold;
+  }
+}
+
+/* recent blog posts widget */
+.recent_posts {
+  margin-bottom: 10px;
+
+  .post_date {
+    font-style: italic;
+    font-size: 75%;
+  }
+}
+
+/* news archive widget */
+#news-archive {
+  list-style: none;
+
+  a {
+    font-weight: bold;
+  }
+
+  ul {
+    list-style: none;
+    margin-left: 16px;
+
+    a {
+      font-weight: normal;
+    }
+  }
+
+  span { cursor: pointer; }
+}
+
+// Aspect Ratios
+[style*="--aspect-ratio"] > :first-child {
+  width: 100%;
+}
+
+[style*="--aspect-ratio"] > img {
+  height: auto;
+}
+
+@supports (--custom:property) {
+  [style*="--aspect-ratio"] {
+    position: relative;
+  }
+
+  [style*="--aspect-ratio"]::before {
+    content: "";
+    display: block;
+    padding-bottom: calc(100% / (var(--aspect-ratio)));
+  }
+
+  [style*="--aspect-ratio"] > :first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+}

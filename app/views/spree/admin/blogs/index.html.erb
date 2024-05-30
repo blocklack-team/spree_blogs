@@ -1,0 +1,63 @@
+<% content_for :page_title do %>
+  <%= I18n.t('spree_blogs.admin.blogs') %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to(I18n.t('spree_blogs.admin.new_blog'), new_object_url, icon: 'add.svg', class: 'btn-success') %>
+<% end %>
+
+<% if @blogs.any? %>
+<div class="table-responsive" style="overflow-x: visible;">
+  <table class="index table">
+    <thead>
+      <tr>
+        <th class="title"><%= I18n.t('spree_blogs.admin.title') %></th>
+        <th class="actions"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @blogs.each do |blog| %>
+        <tr class="<%= cycle('odd', 'even') %>" id="<%= spree_dom_id blog %>">
+          <td><%= blog.title %></td>
+          <td class="actions">
+            <span class="d-flex justify-content-end">
+              <% unless blog.stores.empty? %>
+                <div class="dropdown d-inline-block">
+                  <button class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                          type="button"
+                          id="dropdownMenuButton-<%= blog.slug %>"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false">
+
+                    <%= svg_icon name: "view.svg", width: '16', height: '16' %>
+                  </button>
+                  <div class="dropdown-menu mt-2 p-0 mr-2 dropdown-menu-right" aria-labelledby="dropdownMenuButton-<%= blog.slug %>">
+                    <div class="dropdown-item px-0 py-2 text-center bg-light">
+                      <%= I18n.t('spree_blogs.admin.view_blog_in_store') %>
+                    </div>
+                    <div class="dropdown-divider m-0"></div>
+                    <% blog.stores.each do |store| %>
+                      <%= view_blog_in_store_link(blog, store) %>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+              <%= link_to_edit(blog, no_text: true) %>
+              <%= link_to_delete(blog, no_text: true) %>
+            </span>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+  <%= render 'spree/admin/shared/index_table_options', collection: @blogs, simple: true %>
+
+<% else %>
+  <div class="no-objects-found">
+    <%= I18n.t('spree_blogs.admin.no_blogs_found') %>,
+    <%= link_to I18n.t('spree_blogs.admin.add_one'), spree.new_admin_blog_path %>
+  </div>
+<% end %>

@@ -1,0 +1,39 @@
+<% @blog = Spree::Blog.by_store(current_store).friendly.find(blog) %>
+<% @posts = @blog.posts.published_and_visible.page(1).per(post_count) %>
+
+<section class="container">
+  <div class="row">
+    <div class="col">
+      <h1 class="text-center mt-5"><%= @blog.title %></h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <% @posts.each do |post| %>
+      <div class="col-12 col-md-6 col-lg my-3">
+
+        <% if post.post_image.present? %>
+          <div class="post-img" style="--aspect-ratio:<%= SpreeBlogs::Config.image_ratio %>;">
+            <%= image_tag(main_app.url_for(post.post_image.attachment),
+                          options = { class:'lazyload',
+                                      alt: post.post_image.alt,
+                                      data: { src: main_app.url_for(post.post_image.attachment),
+                                              srcset: main_app.url_for(post.post_image.attachment) }
+                                    }) %>
+          </div>
+        <% end %>
+
+        <div class="row">
+          <div class="col">
+            <h3 class="mb-0 mt-2"><%= link_to post.title, blog_post_path(@blog, post), class: " text-body" %></h3>
+
+            <%# i18n-tasks-use t('time.formats.blog_date') %>
+            <span class="small text-secondary"><%= localize(post.published_at, format: :blog_date) %></span>
+            <p class="mt-1"><%= post.excerpt %></p>
+            <p><%= link_to I18n.t('spree_blogs.frontend.read_more'), blog_post_path(@blog, post) %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>

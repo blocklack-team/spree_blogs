@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <%= render partial: 'spree/shared/blogs_breadcrumbs', locals: { blog: @blog, tag: nil, post: @post } %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <% if @post.post_image.present? %>
+        <div class="post-img" style="--aspect-ratio:<%= SpreeBlogs::Config.image_ratio %>;">
+            <%= image_tag(main_app.url_for(@post.post_image.attachment),
+                          options = { class:'lazyload',
+                                      alt: @post.post_image.alt,
+                                      data: { src: main_app.url_for(@post.post_image.attachment), srcset: main_app.url_for(@post.post_image.attachment) }
+                                    }) %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-12">
+      <h1><%= @post.title %></h1>
+
+      <p class="small">
+        <span class="text-muted"><%= I18n.t('spree_blogs.frontend.posted_on') %></span>
+
+        <%# i18n-tasks-use t('time.formats.blog_date') %>
+        <%= localize(@post.published_at, format: :blog_date) %>
+        <span class="text-muted">| <%= I18n.t('spree_blogs.frontend.posted_in') %></span>
+        <%= @post.blog.title %>
+        <% if @post.author_display_name %>
+          <span class="text-muted">| <%= I18n.t('spree_blogs.frontend.posted_by') %></span>
+          <%= @post.author_display_name %>
+        <% end %>
+      </p>
+
+      <% if SpreeBlogs::Config.use_raw_post_content && !SpreeBlogs::Config.use_action_text %>
+        <%= raw @post.post_content %>
+      <% else %>
+        <%= @post.post_content %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% unless @post.live? %>
+  <div class="fixed-bottom text-center">
+    <div class="row">
+      <div id="draftNotice" class="col-12 d-flex w-100 p-4 justify-content-center align-items-center bg-dark">
+        <span class="text-white"><%= link_to I18n.t('spree_blogs.frontend.viewing_post_in_draft_mode') %></span>
+      </div>
+    </div>
+  </div>
+<% end %>

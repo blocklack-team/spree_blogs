@@ -1,0 +1,9 @@
+<ul id="sidebar-blogs"
+    class="border-top bg-white collapse nav nav-pills nav-stacked"
+    data-hook="admin_blog_sub_tabs">
+  <%= tab :blogs %>
+  <%= tab :posts %>
+  <% if defined?(SpreePages) %>
+    <%= tab :pages %>
+  <% end %>
+</ul>

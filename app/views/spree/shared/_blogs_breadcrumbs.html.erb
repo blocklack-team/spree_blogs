@@ -1,0 +1,38 @@
+<nav id="breadcrumbs" class="col-12 mt-1 mt-sm-3 mt-lg-4" aria-label="breadcrumbs">
+  <ol class="breadcrumb blog-breadcrumb">
+    <li class="breadcrumb-item">
+      <span>
+        <%= link_to I18n.t('spree_blogs.frontend.home'), spree.root_path %>
+      </span>
+    </li>
+    <% if blog.present? && tag.present? %>
+      <li class="breadcrumb-item">
+        <%= link_to blog.title, blog_path(blog) %>
+      </li>
+    <% elsif blog.present? && post.present? %>
+      <li class="breadcrumb-item">
+        <%= link_to blog.title, blog_path(blog) %>
+      </li>
+    <% else blog.present? %>
+      <li class="breadcrumb-item">
+        <span class="text-muted">
+          <%= blog.title %>
+        </span>
+      </li>
+    <% end %>
+    <% if tag.present? %>
+      <li class="breadcrumb-item">
+        <span class="text-muted">
+          <%= tag %>
+        </span>
+      </li>
+    <% end %>
+    <% if post.present? %>
+      <li class="breadcrumb-item">
+        <span class="text-muted">
+          <%= post.title %>
+        </span>
+      </li>
+    <% end %>
+  </ol>
+</nav>

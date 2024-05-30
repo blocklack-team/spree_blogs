@@ -1,0 +1,85 @@
+<div class="row">
+  <div class="col-8">
+
+    <div class="row">
+      <div class="col-12">
+        <h5><%= I18n.t('spree_blogs.admin.blog_details') %></h5>
+        <%= form.field_container :title do %>
+        <div class="form-group">
+          <%= form.label :title, I18n.t('spree_blogs.admin.title') %> <span class="text-danger">*</span>
+          <%= form.text_field :title, class: 'form-control', required: true %>
+          <%= form.error_message_on :title %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <h5><%= I18n.t('spree_blogs.admin.seo') %></h5>
+        <%= form.field_container :meta_title do %>
+        <div class="form-group">
+          <%= form.label :meta_title, I18n.t('spree_blogs.admin.meta_title') %>
+          <%= form.text_field :meta_title, class: 'form-control' %>
+          <%= form.error_message_on :meta_title %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <%= form.field_container :slug do %>
+        <div class="form-group">
+          <%= form.label :slug, I18n.t('spree_blogs.admin.slug') %>
+          <%= form.text_field :slug, class: 'form-control', id: 'slug', onfocusout: 'validateSlug()' %>
+          <%= form.error_message_on :slug %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <%= form.field_container :meta_description do %>
+          <div class="form-group">
+            <%= form.label :meta_description, I18n.t('spree_blogs.admin.meta_description') %>
+            <%= form.text_area :meta_description, { rows: 6, class: 'form-control'} %>
+            <%= form.error_message_on :meta_description %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-4">
+
+    <div class="row">
+      <div class="col-12">
+       <h5>Stores</h5>
+        <%= collection_check_boxes(:blog, :store_ids, Spree::Store.all, :id, :unique_name) do |form| %>
+          <div class="custom-control custom-checkbox">
+            <%= form.check_box(class: "custom-control-input") %>
+            <%= form.label(class: "custom-control-label") %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function validateSlug() {
+    var x = document.getElementById("slug");
+
+     var slugged = slugify(x.value, {
+          replacement: '-',
+          remove: undefined,
+          lower: true,
+          strict: false,
+        })
+
+     x.value = slugged
+  }
+</script>

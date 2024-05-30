@@ -1,0 +1,21 @@
+---
+base_locale: en
+data:
+  read:
+
+  write:
+
+  external:
+
+  yaml:
+    write:
+      # do not wrap lines at 80 characters
+      line_width: -1
+
+search:
+  paths:
+    - app/
+  exclude:
+    - app/assets/images
+    - app/assets/fonts
+    - app/assets/videos

@@ -1,0 +1,30 @@
+<% @posts.each do |post| %>
+  <div class="row my-5">
+    <% if post.post_image.present? %>
+      <div class="post-img col-4" style="--aspect-ratio:<%= SpreeBlogs::Config.image_ratio %>;">
+        <%= image_tag(main_app.url_for(post.post_image.attachment),
+                      options = { class:'lazyload',
+                                  alt: post.post_image.alt,
+                                  data: { src: main_app.url_for(post.post_image.attachment),
+                                          srcset: main_app.url_for(post.post_image.attachment) }
+                                }) %>
+      </div>
+    <% end %>
+
+      <div class="col-8">
+        <h2><%= link_to post.title, blog_post_path(@blog, post) %></h2>
+        <%= post.excerpt %>
+        <p><%= link_to I18n.t('spree_blogs.frontend.read_more'), blog_post_path(@blog, post) %></p>
+      </div>
+  </div>
+<% end %>
+
+<% if @posts.respond_to?(:total_pages) %>
+  <div class="plp-pagination d-none d-lg-flex">
+    <%= paginate @posts, window: 2, theme: 'twitter-bootstrap-4' %>
+  </div>
+
+  <div class="plp-pagination d-lg-none">
+    <%= paginate @posts, window: 1, theme: 'twitter-bootstrap-4' %>
+  </div>
+<% end %>
