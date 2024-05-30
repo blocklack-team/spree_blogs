@@ -5,7 +5,7 @@ module SpreeBlogs
     engine_name "spree_blogs"
 
     initializer "spree_blogs.environment", before: :load_config_initializers do |_app|
-      SpreeBlogs::Config = SpreeBlogs::Configuration.new
+      SpreeBlogs::Config = Spree::Configuration.new
     end
 
     # use rspec for tests
