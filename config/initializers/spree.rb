@@ -1,13 +1,13 @@
 Rails.application.config.after_initialize do
 
   items = [
-  	Spree::Admin::MainMenu::ItemBuilder.new('Invoices', Spree::Core::Engine.routes.url_helpers.admin_bookkeeping_documents_path(q: { template_eq: 'invoice' })).build,
-    Spree::Admin::MainMenu::ItemBuilder.new('Packaging Slips', Spree::Core::Engine.routes.url_helpers.admin_bookkeeping_documents_path(q: { template_eq: 'packaging_slip' })).build
+  	Spree::Admin::MainMenu::ItemBuilder.new('Blogs', Spree::Core::Engine.routes.url_helpers.admin_blogs_path()).build,
+    Spree::Admin::MainMenu::ItemBuilder.new('Posts', Spree::Core::Engine.routes.url_helpers.admin_blogs_path()).build
   ]
 
   Rails.application.config.spree_backend.main_menu.add(
-    Spree::Admin::MainMenu::SectionBuilder.new(Spree.t(:documents, scope: [:print_invoice]), 'file.svg').
-      with_admin_ability_check(Spree::Order).
+    Spree::Admin::MainMenu::SectionBuilder.new(Spree.t(:blogs), 'blogs.svg').
+      with_admin_ability_check(Spree::Blog).
       with_items(items).
       build
   )
