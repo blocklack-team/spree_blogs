@@ -12,3 +12,5 @@ Rails.application.config.after_initialize do
       build
   )
 end
+
+SpreeBlogs::Config.use_action_text = true
