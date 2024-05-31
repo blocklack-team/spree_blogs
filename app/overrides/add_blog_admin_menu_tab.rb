@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 AddBlogAdminMenuTab = Deface::Override.new(
-  virtual_path: "spree/admin/shared/_main_menu",
-  name: "blogs_admin_sidebar_menu",
-  insert_before: "ul#sidebarConfiguration",
+  virtual_path: 'spree/layouts/admin',
+  name: 'blogs_admin_sidebar_menu',
+  insert_bottom: '#main-sidebar',
   partial: "spree/admin/shared/blogs_sidebar_menu",
-  disabled: false
 )
