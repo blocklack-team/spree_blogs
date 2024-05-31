@@ -10,14 +10,4 @@ Rails.application.config.after_initialize do
       with_items(items).
       build
   )
-
-  Rails.application.config.spree_backend.tabs[:blog].add(
-    Spree::Admin::Tabs::TabBuilder.new(
-      I18n.t('spree_blogs.admin.blogs'), 
-      ->(blog) { Spree::Core::Engine.routes.url_helpers.admin_blogs_path(blog) }
-    ).
-    with_icon_key('blogs.svg').
-    with_active_check.
-    build
-  )
 end
