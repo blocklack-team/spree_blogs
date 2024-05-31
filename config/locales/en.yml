@@ -1,8 +1,8 @@
 ---
 en:
   spree:
-    blogs: Blogs
-    posts: Posts
+    blogs: "Blogs"
+    posts: "Posts"
   spree_blogs:
     admin:
       add_one: add one
