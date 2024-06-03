@@ -20,7 +20,7 @@
           <%= form.field_container :action_text_content do %>
             <div class="form-group">
               <%= form.label :action_text_content, I18n.t('spree_blogs.admin.content') %> <span class="text-danger">*</span>
-              <%= form.text_area :action_text_content, { class: 'spree-rte', id: 'post_body', required: true } %>
+              <%= form.rich_text_area :action_text_content, {id: 'post_body', required: true } %>
               <%= form.error_message_on :action_text_content %>
             </div>
           <% end %>
@@ -32,7 +32,7 @@
           <%= form.field_container :content do %>
             <div class="form-group">
               <%= form.label :content, I18n.t('spree_blogs.admin.content') %> <span class="text-danger">*</span>
-              <%= form.text_area :content, { rows: 16, class: 'spree-rte', id: 'post_content', required: true } %>
+              <%= form.text_area :content, { rows: 16, class: 'form-control spree-rte', id: 'post_content', required: true } %>
               <%= form.error_message_on :content %>
             </div>
           <% end %>
