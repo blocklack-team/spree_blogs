@@ -1,5 +1,5 @@
 module Api
-	class PostsController < ::Spree::Api::V2::ResourceController
+	class ArticlesController < ::Spree::Api::V2::ResourceController
 		before_action :require_spree_current_user, except: [:show]
 
 		def show
