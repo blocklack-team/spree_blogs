@@ -1,6 +1,6 @@
 class Spree::Api::ArticlesController < Spree::StoreController
 	def show
-		@blog = Spree::Blog.by_store(current_store).friendly.find(params[:blog_id])
+		@blog = Spree::Blog.friendly.find(params[:blog_id])
 
 		@post = if try_spree_current_user.try(:has_spree_role?, "admin")
 			@blog.posts.find(params[:id])
