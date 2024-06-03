@@ -32,7 +32,7 @@
           <%= form.field_container :content do %>
             <div class="form-group">
               <%= form.label :content, I18n.t('spree_blogs.admin.content') %> <span class="text-danger">*</span>
-              <%= form.text_area :content, { rows: 16, class: 'form-control spree-rte', id: 'post_content', required: true } %>
+              <%= form.text_area :content, { rows: 16, class: 'form-control spree-rte', id: 'post_content' } %>
               <%= form.error_message_on :content %>
             </div>
           <% end %>
