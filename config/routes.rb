@@ -8,4 +8,8 @@ Spree::Core::Engine.add_routes do
     get "/tagged/:tag" => "blogs#tag", :as => :tag
     get "/:id" => "posts#show", :as => :post
   end
+
+  namespace :api, defaults: { format: 'json' } do
+    resources :posts, only: [:show]
+  end
 end
