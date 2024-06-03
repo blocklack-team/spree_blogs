@@ -20,7 +20,7 @@
           <%= form.field_container :action_text_content do %>
             <div class="form-group">
               <%= form.label :action_text_content, I18n.t('spree_blogs.admin.content') %> <span class="text-danger">*</span>
-              <%= form.rich_text_area :action_text_content, {id: 'post_body', required: true, class: 'form-control spree-rte' } %>
+              <%= form.text_area :action_text_content, class: 'spree-rte wysiwyg form-control', id: 'post_body', required: true %>
               <%= form.error_message_on :action_text_content %>
             </div>
           <% end %>
