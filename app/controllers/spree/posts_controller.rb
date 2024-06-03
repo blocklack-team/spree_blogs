@@ -15,6 +15,7 @@ class Spree::PostsController < Spree::StoreController
     respond_to do |format|
       format.html
       format.rss { render layout: false }
+      format.json { render json: @post, status: :ok }
     end
   end
 end
