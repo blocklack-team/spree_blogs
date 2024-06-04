@@ -10,8 +10,6 @@ Spree::Core::Engine.add_routes do
   end
 
   namespace :api, defaults: { format: 'json' } do
-    resources :articles, only: [:show] do
-      get "/:id" => "articles#show", :as => :post
-    end
+    resources :articles, only: [:index, :show]
   end
 end
