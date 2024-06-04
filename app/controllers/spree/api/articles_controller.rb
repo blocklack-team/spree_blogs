@@ -13,10 +13,12 @@ class Spree::Api::ArticlesController < ::Spree::Api::V2::ResourceController
 	end
 
 	def show
-		@post = @blog.posts.published_and_visible.find(params[:id])
+		post = @blog.posts.published_and_visible.find(params[:id])
 
-		respond_to do |format|
-			format.json { render json: @post, status: :ok }
+		if post.present?
+			render json: post, status: :ok
+		else
+			render json: { errors: 'No articles found' }, status: :ok
 		end
 	end
 
