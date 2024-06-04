@@ -13,8 +13,8 @@ class Spree::Api::ArticlesController < ::Spree::Api::V2::ResourceController
 					content: post.content,
 					slug: post.slug,
 					excerpt: post.excerpt,
-					post_image: main_app.url_for(post.post_image.attachment) if post.post_image.present?,
-					author: post.author_display_name if post.author_display_name,
+					post_image: post.post_image.present? ? main_app.url_for(post.post_image.attachment) : '',
+					author: post.author_display_name ? post.author_display_name : '',
 					published_at: post.published_at
 				}
 			end
@@ -34,8 +34,8 @@ class Spree::Api::ArticlesController < ::Spree::Api::V2::ResourceController
 				content: post.content,
 				slug: post.slug,
 				excerpt: post.excerpt,
-				post_image: main_app.url_for(post.post_image.attachment) if post.post_image.present?,
-				author: post.author_display_name if post.author_display_name,
+				post_image: post.post_image.present? ? main_app.url_for(post.post_image.attachment) : '',
+				author: post.author_display_name ? post.author_display_name : '',
 				published_at: post.published_at
 			}
 			render json: response, status: :ok
