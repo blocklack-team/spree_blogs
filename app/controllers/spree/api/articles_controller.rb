@@ -6,7 +6,19 @@ class Spree::Api::ArticlesController < ::Spree::Api::V2::ResourceController
 		posts = @blog.posts.published_and_visible
 	  
 		if posts.present?
-			render json: posts, status: :ok
+			response = posts.map do |post|
+				{
+					id: post.id,
+					title: post.title,
+					content: post.content,
+					slug: post.slug,
+					excerpt: post.excerpt,
+					post_image: main_app.url_for(post.post_image.attachment) if post.post_image.present?,
+					author: post.author_display_name if post.author_display_name,
+					published_at: post.published_at
+				}
+			end
+			render json: response, status: :ok
 		else
 			render json: { errors: 'No articles found' }, status: :ok
 		end
@@ -16,7 +28,17 @@ class Spree::Api::ArticlesController < ::Spree::Api::V2::ResourceController
 		post = @blog.posts.published_and_visible.find(params[:id])
 
 		if post.present?
-			render json: post, status: :ok
+			response = {
+				id: post.id,
+				title: post.title,
+				content: post.content,
+				slug: post.slug,
+				excerpt: post.excerpt,
+				post_image: main_app.url_for(post.post_image.attachment) if post.post_image.present?,
+				author: post.author_display_name if post.author_display_name,
+				published_at: post.published_at
+			}
+			render json: response, status: :ok
 		else
 			render json: { errors: 'No articles found' }, status: :ok
 		end
