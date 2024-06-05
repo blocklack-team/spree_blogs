@@ -15,6 +15,7 @@ class Spree::Api::ArticlesController < ::Spree::Api::V2::ResourceController
 					excerpt: post.excerpt,
 					post_image: post.post_image.present? ? main_app.url_for(post.post_image.attachment) : '',
 					author: post.author_display_name ? post.author_display_name : '',
+					tags: post.tag_list,
 					published_at: post.published_at
 				}
 			end
@@ -36,6 +37,7 @@ class Spree::Api::ArticlesController < ::Spree::Api::V2::ResourceController
 				excerpt: post.excerpt,
 				post_image: post.post_image.present? ? main_app.url_for(post.post_image.attachment) : '',
 				author: post.author_display_name ? post.author_display_name : '',
+				tags: post.tag_list,
 				published_at: post.published_at
 			}
 			render json: response, status: :ok
